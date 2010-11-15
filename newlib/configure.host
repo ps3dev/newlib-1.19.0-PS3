@@ -482,6 +482,9 @@ case "${host}" in
 	sys_dir=sparc64
 	unix_dir=unix
 	;;
+  *-*-lv2)
+	sys_dir=lv2
+	;;
   spu-*-*)
 	default_newlib_io_long_long="yes"
 	default_newlib_atexit_dynamic_alloc="no"

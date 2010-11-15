@@ -29,6 +29,7 @@ if test -n "${sys_dir}"; then
 	h8300hms) AC_CONFIG_SUBDIRS(h8300hms) ;;
 	h8500hms) AC_CONFIG_SUBDIRS(h8500hms) ;;
 	linux) AC_CONFIG_SUBDIRS(linux) ;;
+	lv2) AC_CONFIG_SUBDIRS(lv2) ;;
 	m88kbug) AC_CONFIG_SUBDIRS(m88kbug) ;;
 	mmixware) AC_CONFIG_SUBDIRS(mmixware) ;;
 	netware) AC_CONFIG_SUBDIRS(netware) ;;
