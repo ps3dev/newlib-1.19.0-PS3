@@ -1,22 +1,20 @@
 #ifndef __SYS_LOCK_H__
 #define __SYS_LOCK_H__
 
-typedef struct __libc_lock_s
-{
-  void *lock;
-}
-__libc_lock_t;
+#include <stdint.h>
 
-typedef struct __libc_lock_recursive_s
-{
-  void *lock;
-}
-__libc_lock_recursive_t;
+struct sys_lwmutex {
+  uint64_t lock_var;
+  uint32_t attribute;
+  uint32_t recursive_count;
+  uint32_t sleep_queue;
+  uint32_t pad;
+};
 
-#define __libc_autolock_magic ((void*)0xffffffff00000001UL)
+typedef struct sys_lwmutex __libc_lock_t, __libc_lock_recursive_t;
 
-#define __libc_lock_define_initialized(CLASS, NAME) CLASS __libc_lock_t NAME = {__libc_autolock_magic};
-#define __libc_lock_define_initialized_recursive(CLASS, NAME) CLASS __libc_lock_recursive_t NAME = {__libc_autolock_magic};
+#define __libc_lock_define_initialized(CLASS, NAME) CLASS __libc_lock_t NAME = {0,};
+#define __libc_lock_define_initialized_recursive(CLASS, NAME) CLASS __libc_lock_recursive_t NAME = {0,};
 
 int __libc_lock_init(__libc_lock_t *lock);
 int __libc_lock_init_recursive(__libc_lock_recursive_t *lock);

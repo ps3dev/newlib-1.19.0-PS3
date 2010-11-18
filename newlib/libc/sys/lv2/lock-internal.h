@@ -1,12 +1,6 @@
 #include <stdint.h>
 
-typedef struct sys_lwmutex_t {
-	uint64_t lock_var;
-	uint32_t attribute;
-	uint32_t recursive_count;
-	uint32_t sleep_queue;
-	uint32_t pad;
-}sys_lwmutex_t;
+typedef struct sys_lwmutex sys_lwmutex_t;
 
 #define LWMUTEX_ATTR_PROTOCOL  0x0002
 #define LWMUTEX_ATTR_RECURSIVE 0x0010
@@ -26,5 +20,7 @@ static const sys_lwmutex_attribute_t __libc_lock_attributes = {
   LWMUTEX_ATTR_PROTOCOL, LWMUTEX_ATTR_RECURSIVE, ""
 };
 
-extern void __libc_auto_lock_allocate(void **pMutex);
+#define LWMUTEX_UNINITIALIZED(plwm) (!((plwm)->attribute))
+
+extern void __libc_auto_lock_allocate(sys_lwmutex_t *pMutex);
 
