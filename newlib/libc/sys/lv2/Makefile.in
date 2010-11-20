@@ -54,7 +54,9 @@ lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-getcwd.$(OBJEXT) \
 	lib_a-gettimeofday.$(OBJEXT) lib_a-glob.$(OBJEXT) \
-	lib_a-globfree.$(OBJEXT)
+	lib_a-globfree.$(OBJEXT) lib_a-lock.$(OBJEXT) \
+	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
+	lib_a-getreent.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -172,7 +174,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dup.c getcwd.c gettimeofday.c glob.c globfree.c
+lib_a_SOURCES = dup.c getcwd.c gettimeofday.c glob.c globfree.c lock.c lock_recursive.c autolock.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -264,6 +266,30 @@ lib_a-globfree.o: globfree.c
 
 lib_a-globfree.obj: globfree.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-globfree.obj `if test -f 'globfree.c'; then $(CYGPATH_W) 'globfree.c'; else $(CYGPATH_W) '$(srcdir)/globfree.c'; fi`
+
+lib_a-lock.o: lock.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock.o `test -f 'lock.c' || echo '$(srcdir)/'`lock.c
+
+lib_a-lock.obj: lock.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock.obj `if test -f 'lock.c'; then $(CYGPATH_W) 'lock.c'; else $(CYGPATH_W) '$(srcdir)/lock.c'; fi`
+
+lib_a-lock_recursive.o: lock_recursive.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock_recursive.o `test -f 'lock_recursive.c' || echo '$(srcdir)/'`lock_recursive.c
+
+lib_a-lock_recursive.obj: lock_recursive.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock_recursive.obj `if test -f 'lock_recursive.c'; then $(CYGPATH_W) 'lock_recursive.c'; else $(CYGPATH_W) '$(srcdir)/lock_recursive.c'; fi`
+
+lib_a-autolock.o: autolock.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-autolock.o `test -f 'autolock.c' || echo '$(srcdir)/'`autolock.c
+
+lib_a-autolock.obj: autolock.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-autolock.obj `if test -f 'autolock.c'; then $(CYGPATH_W) 'autolock.c'; else $(CYGPATH_W) '$(srcdir)/autolock.c'; fi`
+
+lib_a-getreent.o: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.o `test -f 'getreent.c' || echo '$(srcdir)/'`getreent.c
+
+lib_a-getreent.obj: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
