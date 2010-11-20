@@ -56,7 +56,8 @@ am_lib_a_OBJECTS = lib_a-chmod.$(OBJEXT) lib_a-dup.$(OBJEXT) \
 	lib_a-getcwd.$(OBJEXT) lib_a-gettimeofday.$(OBJEXT) \
 	lib_a-glob.$(OBJEXT) lib_a-globfree.$(OBJEXT) \
 	lib_a-umask.$(OBJEXT) lib_a-lock.$(OBJEXT) \
-	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT)
+	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
+	lib_a-getreent.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -296,6 +297,12 @@ lib_a-autolock.o: autolock.c
 
 lib_a-autolock.obj: autolock.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-autolock.obj `if test -f 'autolock.c'; then $(CYGPATH_W) 'autolock.c'; else $(CYGPATH_W) '$(srcdir)/autolock.c'; fi`
+
+lib_a-getreent.o: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.o `test -f 'getreent.c' || echo '$(srcdir)/'`getreent.c
+
+lib_a-getreent.obj: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
