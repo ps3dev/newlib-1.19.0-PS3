@@ -52,10 +52,8 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-chmod.$(OBJEXT) lib_a-dup.$(OBJEXT) \
-	lib_a-getcwd.$(OBJEXT) lib_a-gettimeofday.$(OBJEXT) \
-	lib_a-glob.$(OBJEXT) lib_a-globfree.$(OBJEXT) \
-	lib_a-umask.$(OBJEXT)
+am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-gettimeofday.$(OBJEXT) \
+	lib_a-glob.$(OBJEXT) lib_a-globfree.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -173,7 +171,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = chmod.c dup.c getcwd.c gettimeofday.c glob.c globfree.c umask.c
+lib_a_SOURCES = dup.c gettimeofday.c glob.c globfree.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -236,23 +234,11 @@ distclean-compile:
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
-lib_a-chmod.o: chmod.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-chmod.o `test -f 'chmod.c' || echo '$(srcdir)/'`chmod.c
-
-lib_a-chmod.obj: chmod.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-chmod.obj `if test -f 'chmod.c'; then $(CYGPATH_W) 'chmod.c'; else $(CYGPATH_W) '$(srcdir)/chmod.c'; fi`
-
 lib_a-dup.o: dup.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dup.o `test -f 'dup.c' || echo '$(srcdir)/'`dup.c
 
 lib_a-dup.obj: dup.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dup.obj `if test -f 'dup.c'; then $(CYGPATH_W) 'dup.c'; else $(CYGPATH_W) '$(srcdir)/dup.c'; fi`
-
-lib_a-getcwd.o: getcwd.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.o `test -f 'getcwd.c' || echo '$(srcdir)/'`getcwd.c
-
-lib_a-getcwd.obj: getcwd.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.obj `if test -f 'getcwd.c'; then $(CYGPATH_W) 'getcwd.c'; else $(CYGPATH_W) '$(srcdir)/getcwd.c'; fi`
 
 lib_a-gettimeofday.o: gettimeofday.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-gettimeofday.o `test -f 'gettimeofday.c' || echo '$(srcdir)/'`gettimeofday.c
@@ -271,12 +257,6 @@ lib_a-globfree.o: globfree.c
 
 lib_a-globfree.obj: globfree.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-globfree.obj `if test -f 'globfree.c'; then $(CYGPATH_W) 'globfree.c'; else $(CYGPATH_W) '$(srcdir)/globfree.c'; fi`
-
-lib_a-umask.o: umask.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-umask.o `test -f 'umask.c' || echo '$(srcdir)/'`umask.c
-
-lib_a-umask.obj: umask.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-umask.obj `if test -f 'umask.c'; then $(CYGPATH_W) 'umask.c'; else $(CYGPATH_W) '$(srcdir)/umask.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
