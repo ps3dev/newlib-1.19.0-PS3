@@ -52,8 +52,9 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-gettimeofday.$(OBJEXT) \
-	lib_a-glob.$(OBJEXT) lib_a-globfree.$(OBJEXT)
+am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-getcwd.$(OBJEXT) \
+	lib_a-gettimeofday.$(OBJEXT) lib_a-glob.$(OBJEXT) \
+	lib_a-globfree.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -171,7 +172,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dup.c gettimeofday.c glob.c globfree.c
+lib_a_SOURCES = dup.c getcwd.c gettimeofday.c glob.c globfree.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -239,6 +240,12 @@ lib_a-dup.o: dup.c
 
 lib_a-dup.obj: dup.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dup.obj `if test -f 'dup.c'; then $(CYGPATH_W) 'dup.c'; else $(CYGPATH_W) '$(srcdir)/dup.c'; fi`
+
+lib_a-getcwd.o: getcwd.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.o `test -f 'getcwd.c' || echo '$(srcdir)/'`getcwd.c
+
+lib_a-getcwd.obj: getcwd.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.obj `if test -f 'getcwd.c'; then $(CYGPATH_W) 'getcwd.c'; else $(CYGPATH_W) '$(srcdir)/getcwd.c'; fi`
 
 lib_a-gettimeofday.o: gettimeofday.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-gettimeofday.o `test -f 'gettimeofday.c' || echo '$(srcdir)/'`gettimeofday.c
