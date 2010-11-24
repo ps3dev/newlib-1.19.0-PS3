@@ -53,9 +53,10 @@ ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-getcwd.$(OBJEXT) \
-	lib_a-glob.$(OBJEXT) lib_a-globfree.$(OBJEXT) \
-	lib_a-lock.$(OBJEXT) lib_a-lock_recursive.$(OBJEXT) \
-	lib_a-autolock.$(OBJEXT) lib_a-getreent.$(OBJEXT)
+	lib_a-getrusage.$(OBJEXT) lib_a-glob.$(OBJEXT) \
+	lib_a-globfree.$(OBJEXT) lib_a-lock.$(OBJEXT) \
+	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
+	lib_a-getreent.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -173,7 +174,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dup.c getcwd.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c
+lib_a_SOURCES = dup.c getcwd.c getrusage.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -247,6 +248,12 @@ lib_a-getcwd.o: getcwd.c
 
 lib_a-getcwd.obj: getcwd.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.obj `if test -f 'getcwd.c'; then $(CYGPATH_W) 'getcwd.c'; else $(CYGPATH_W) '$(srcdir)/getcwd.c'; fi`
+
+lib_a-getrusage.o: getrusage.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.o `test -f 'getrusage.c' || echo '$(srcdir)/'`getrusage.c
+
+lib_a-getrusage.obj: getrusage.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.obj `if test -f 'getrusage.c'; then $(CYGPATH_W) 'getrusage.c'; else $(CYGPATH_W) '$(srcdir)/getrusage.c'; fi`
 
 lib_a-glob.o: glob.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-glob.o `test -f 'glob.c' || echo '$(srcdir)/'`glob.c
