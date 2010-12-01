@@ -11,9 +11,10 @@ typedef struct sys_lwmutex_attribute_t {
 }sys_lwmutex_attribute_t;
 
 
-extern uint32_t sys_lwmutex_create(sys_lwmutex_t *lwmutex, const sys_lwmutex_attribute_t *lwmutex_attr);
-extern void sys_lwmutex_destroy(sys_lwmutex_t *lwmutex);
+extern int32_t sys_lwmutex_create(sys_lwmutex_t *lwmutex, const sys_lwmutex_attribute_t *lwmutex_attr);
+extern int32_t sys_lwmutex_destroy(sys_lwmutex_t *lwmutex);
 extern int32_t sys_lwmutex_lock(sys_lwmutex_t *lwmutex, uint64_t timeout_usec);
+extern int32_t sys_lwmutex_trylock(sys_lwmutex_t *lwmutex);
 extern int32_t sys_lwmutex_unlock(sys_lwmutex_t *lwmutex);
 
 static const sys_lwmutex_attribute_t __libc_lock_attributes = {

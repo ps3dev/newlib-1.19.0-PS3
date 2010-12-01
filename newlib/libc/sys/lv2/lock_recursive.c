@@ -17,8 +17,7 @@ int __libc_lock_init_recursive(__libc_lock_recursive_t *lock)
 
 int __libc_lock_close_recursive(__libc_lock_recursive_t *lock)
 {
-  sys_lwmutex_destroy(lock);
-  return 0;
+  return sys_lwmutex_destroy(lock);
 }
 
 int __libc_lock_acquire_recursive(__libc_lock_recursive_t *lock)
@@ -32,8 +31,7 @@ int __libc_lock_try_acquire_recursive(__libc_lock_recursive_t *lock)
 {
   if (LWMUTEX_UNINITIALIZED(lock))
     __libc_auto_lock_allocate(lock);
-  /* Maybe there exists a real sys_lwmutex_trylock? */
-  return sys_lwmutex_lock(lock, 1);
+  return sys_lwmutex_trylock(lock);
 }
 
 int __libc_lock_release_recursive(__libc_lock_recursive_t *lock)

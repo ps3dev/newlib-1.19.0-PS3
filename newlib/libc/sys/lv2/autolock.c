@@ -28,7 +28,8 @@ void __libc_auto_lock_allocate(sys_lwmutex_t *pMutex)
   /* Need to check the magic again now that we have the lock... */
   if (LWMUTEX_UNINITIALIZED(pMutex)) {
 
-    sys_lwmutex_create(pMutex, &__libc_lock_attributes);
+    if(sys_lwmutex_create(pMutex, &__libc_lock_attributes))
+      abort();
 
   }
 

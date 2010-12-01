@@ -17,8 +17,7 @@ int __libc_lock_init(__libc_lock_t *lock)
 
 int __libc_lock_close(__libc_lock_t *lock)
 {
-  sys_lwmutex_destroy(lock);
-  return 0;
+  return sys_lwmutex_destroy(lock);
 }
 
 int __libc_lock_acquire(__libc_lock_t *lock)
@@ -32,8 +31,7 @@ int __libc_lock_try_acquire(__libc_lock_t *lock)
 {
   if (LWMUTEX_UNINITIALIZED(lock))
     __libc_auto_lock_allocate(lock);
-  /* Maybe there exists a real sys_lwmutex_trylock? */
-  return sys_lwmutex_lock(lock, 1);
+  return sys_lwmutex_trylock(lock);
 }
 
 int __libc_lock_release(__libc_lock_t *lock)
