@@ -56,7 +56,8 @@ am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-getcwd.$(OBJEXT) \
 	lib_a-getrusage.$(OBJEXT) lib_a-glob.$(OBJEXT) \
 	lib_a-globfree.$(OBJEXT) lib_a-lock.$(OBJEXT) \
 	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
-	lib_a-getreent.$(OBJEXT)
+	lib_a-getreent.$(OBJEXT) lib_a-lv2errno.$(OBJEXT) \
+	lib_a-opendir.$(OBJEXT) lib_a-closedir.$(OBJEXT) lib_a-readdir.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -174,7 +175,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dup.c getcwd.c getrusage.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c
+lib_a_SOURCES = dup.c getcwd.c getrusage.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c lv2errno.c opendir.c closedir.c readdir.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -290,6 +291,30 @@ lib_a-getreent.o: getreent.c
 
 lib_a-getreent.obj: getreent.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
+
+lib_a-lv2errno.o: lv2errno.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lv2errno.o `test -f 'lv2errno.c' || echo '$(srcdir)/'`lv2errno.c
+
+lib_a-lv2errno.obj: lv2errno.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lv2errno.obj `if test -f 'lv2errno.c'; then $(CYGPATH_W) 'lv2errno.c'; else $(CYGPATH_W) '$(srcdir)/lv2errno.c'; fi`
+
+lib_a-opendir.o: opendir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-opendir.o `test -f 'opendir.c' || echo '$(srcdir)/'`opendir.c
+
+lib_a-opendir.obj: opendir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-opendir.obj `if test -f 'opendir.c'; then $(CYGPATH_W) 'opendir.c'; else $(CYGPATH_W) '$(srcdir)/opendir.c'; fi`
+
+lib_a-closedir.o: closedir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-closedir.o `test -f 'closedir.c' || echo '$(srcdir)/'`closedir.c
+
+lib_a-closedir.obj: closedir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-closedir.obj `if test -f 'closedir.c'; then $(CYGPATH_W) 'closedir.c'; else $(CYGPATH_W) '$(srcdir)/closedir.c'; fi`
+
+lib_a-readdir.o: readdir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-readdir.o `test -f 'readdir.c' || echo '$(srcdir)/'`readdir.c
+
+lib_a-readdir.obj: readdir.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-readdir.obj `if test -f 'readdir.c'; then $(CYGPATH_W) 'readdir.c'; else $(CYGPATH_W) '$(srcdir)/readdir.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
