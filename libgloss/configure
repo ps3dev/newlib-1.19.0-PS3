@@ -2433,6 +2433,8 @@ config_testsuite=true
 
 config_libnosys=true
 
+config_libsysbase=true
+
 case "${target}" in
   i[3456]86-*-elf* | i[3456]86-*-coff*)
 	subdirs="$subdirs i386"
@@ -2555,6 +2557,7 @@ case "${target}" in
 
 	config_testsuite=false
 	config_libnosys=false
+	config_libsysbase=false
 	;;
   iq2000-*-*)
 	subdirs="$subdirs iq2000"
@@ -2566,6 +2569,10 @@ esac
 if test "${config_libnosys}" = "true"; then
   subdirs="$subdirs libnosys"
 
+fi
+
+if test "${config_libsysbase}" = "true"; then
+  subdirs="$subdirs libsysbase"
 fi
 
 DEPDIR="${am__leading_dot}deps"
