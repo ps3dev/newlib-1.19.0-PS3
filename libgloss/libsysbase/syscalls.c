@@ -19,5 +19,7 @@ struct __syscalls_t __syscalls = {
 	NULL,			//	sys_lwmutex_lock_r
 	NULL,			//	sys_lwmutex_trylock_r
 	NULL,			//	sys_lwmutex_unlock_r
-	NULL			//	exit
+	NULL,			//	exit
+	NULL,                   //      mkdir_r
+	NULL,                   //      rmdir_r
 };

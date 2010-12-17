@@ -31,6 +31,9 @@ struct __syscalls_t {
 	int (*sys_lwmutex_unlock_r)(struct _reent *r,sys_lwmutex_t *lwmutex);
 
 	void (*exit)(int rc);
+
+        int (*mkdir_r)(struct _reent *r,const char *path,mode_t mode);
+        int (*rmdir_r)(struct _reent *r,const char *dirname);
 };
 
 extern struct __syscalls_t __syscalls;
