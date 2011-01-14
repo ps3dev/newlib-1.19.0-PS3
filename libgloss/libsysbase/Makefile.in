@@ -67,7 +67,10 @@ OBJCOPY = `if [ -f ${objroot}/../binutils/objcopy ] ; \
 # object files needed
 OBJS = abort.o close.o environ.o sbrk.o syscalls.o _exit.o fstat.o isatty.o \
 	   lseek.o open.o read.o write.o lock.o ftruncate.o getpid.o fsync.o chdir.o\
-	   wait.o unlink.o execve.o kill.o gettod.o fork.o chmod.o mkdir.o rmdir.o
+	   wait.o unlink.o execve.o kill.o gettod.o fork.o chmod.o mkdir.o rmdir.o\
+	   closedir.o opendir.o readdir.o readdir_r.o rewinddir.o telldir.o seekdir.o\
+	   fstat64.o getrusage.o link.o lseek64.o rename.o stat.o stat64.o truncate.o\
+	   umask.o utime.o settod.o dup.o glob.o globfree.o
 
 	#link.o stat.o \
 	#malloc_vars.o \

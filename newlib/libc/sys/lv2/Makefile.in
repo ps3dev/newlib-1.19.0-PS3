@@ -52,12 +52,9 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-dup.$(OBJEXT) lib_a-getcwd.$(OBJEXT) \
-	lib_a-getrusage.$(OBJEXT) lib_a-glob.$(OBJEXT) \
-	lib_a-globfree.$(OBJEXT) lib_a-lock.$(OBJEXT) \
+am_lib_a_OBJECTS = lib_a-lock.$(OBJEXT) \
 	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
-	lib_a-getreent.$(OBJEXT) lib_a-lv2errno.$(OBJEXT) \
-	lib_a-opendir.$(OBJEXT) lib_a-closedir.$(OBJEXT) lib_a-readdir.$(OBJEXT)
+	lib_a-getreent.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -175,7 +172,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dup.c getcwd.c getrusage.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c lv2errno.c opendir.c closedir.c readdir.c
+lib_a_SOURCES = lock.c lock_recursive.c autolock.c getreent.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -238,36 +235,6 @@ distclean-compile:
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
-lib_a-dup.o: dup.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dup.o `test -f 'dup.c' || echo '$(srcdir)/'`dup.c
-
-lib_a-dup.obj: dup.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dup.obj `if test -f 'dup.c'; then $(CYGPATH_W) 'dup.c'; else $(CYGPATH_W) '$(srcdir)/dup.c'; fi`
-
-lib_a-getcwd.o: getcwd.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.o `test -f 'getcwd.c' || echo '$(srcdir)/'`getcwd.c
-
-lib_a-getcwd.obj: getcwd.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getcwd.obj `if test -f 'getcwd.c'; then $(CYGPATH_W) 'getcwd.c'; else $(CYGPATH_W) '$(srcdir)/getcwd.c'; fi`
-
-lib_a-getrusage.o: getrusage.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.o `test -f 'getrusage.c' || echo '$(srcdir)/'`getrusage.c
-
-lib_a-getrusage.obj: getrusage.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.obj `if test -f 'getrusage.c'; then $(CYGPATH_W) 'getrusage.c'; else $(CYGPATH_W) '$(srcdir)/getrusage.c'; fi`
-
-lib_a-glob.o: glob.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-glob.o `test -f 'glob.c' || echo '$(srcdir)/'`glob.c
-
-lib_a-glob.obj: glob.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-glob.obj `if test -f 'glob.c'; then $(CYGPATH_W) 'glob.c'; else $(CYGPATH_W) '$(srcdir)/glob.c'; fi`
-
-lib_a-globfree.o: globfree.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-globfree.o `test -f 'globfree.c' || echo '$(srcdir)/'`globfree.c
-
-lib_a-globfree.obj: globfree.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-globfree.obj `if test -f 'globfree.c'; then $(CYGPATH_W) 'globfree.c'; else $(CYGPATH_W) '$(srcdir)/globfree.c'; fi`
-
 lib_a-lock.o: lock.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock.o `test -f 'lock.c' || echo '$(srcdir)/'`lock.c
 
@@ -291,30 +258,6 @@ lib_a-getreent.o: getreent.c
 
 lib_a-getreent.obj: getreent.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
-
-lib_a-lv2errno.o: lv2errno.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lv2errno.o `test -f 'lv2errno.c' || echo '$(srcdir)/'`lv2errno.c
-
-lib_a-lv2errno.obj: lv2errno.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lv2errno.obj `if test -f 'lv2errno.c'; then $(CYGPATH_W) 'lv2errno.c'; else $(CYGPATH_W) '$(srcdir)/lv2errno.c'; fi`
-
-lib_a-opendir.o: opendir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-opendir.o `test -f 'opendir.c' || echo '$(srcdir)/'`opendir.c
-
-lib_a-opendir.obj: opendir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-opendir.obj `if test -f 'opendir.c'; then $(CYGPATH_W) 'opendir.c'; else $(CYGPATH_W) '$(srcdir)/opendir.c'; fi`
-
-lib_a-closedir.o: closedir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-closedir.o `test -f 'closedir.c' || echo '$(srcdir)/'`closedir.c
-
-lib_a-closedir.obj: closedir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-closedir.obj `if test -f 'closedir.c'; then $(CYGPATH_W) 'closedir.c'; else $(CYGPATH_W) '$(srcdir)/closedir.c'; fi`
-
-lib_a-readdir.o: readdir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-readdir.o `test -f 'readdir.c' || echo '$(srcdir)/'`readdir.c
-
-lib_a-readdir.obj: readdir.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-readdir.obj `if test -f 'readdir.c'; then $(CYGPATH_W) 'readdir.c'; else $(CYGPATH_W) '$(srcdir)/readdir.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -482,7 +425,7 @@ uninstall-am:
 	uninstall-am
 
 
-all: crt0.o
+all:
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
