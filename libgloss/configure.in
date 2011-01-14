@@ -77,6 +77,9 @@ case "${target}" in
   bfin-*-*)
 	AC_CONFIG_SUBDIRS([bfin])
 	;;
+  cr16-*-*)
+        AC_CONFIG_SUBDIRS([cr16])
+        ;;
   cris-*-* | crisv32-*-*)
 	AC_CONFIG_SUBDIRS([cris])
 	;;
@@ -110,6 +113,9 @@ case "${target}" in
   mt-*-*)
         AC_CONFIG_SUBDIRS([mt])
 	;;
+  v850*-*-*)
+        AC_CONFIG_SUBDIRS([v850])
+        ;;
   xc16x-*-*)
 	AC_CONFIG_SUBDIRS([xc16x])
 	;;
@@ -130,6 +136,10 @@ case "${target}" in
 	config_testsuite=false
 	config_libnosys=false
 	config_libsysbase=false
+	;;
+  tic6x-*-*)
+	AC_CONFIG_SUBDIRS(tic6x)
+	config_testsuite=false
 	;;
   iq2000-*-*)
 	AC_CONFIG_SUBDIRS([iq2000])

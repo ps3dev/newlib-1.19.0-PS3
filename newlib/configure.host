@@ -55,6 +55,7 @@ posix_dir=
 signal_dir=signal
 stdio_dir=stdio
 stdio64_dir=
+xdr_dir=
 syscall_dir=
 unix_dir=
 mach_add_setjmp=
@@ -104,6 +105,9 @@ case "${host_cpu}" in
   bfin)
 	machine_dir=bfin
 	;;
+  cr16*)
+	machine_dir=cr16
+       ;;
   cris | crisv32)
 	machine_dir=cris
 	;;
@@ -248,6 +252,9 @@ case "${host_cpu}" in
   tic4x|c4x)
 	machine_dir=tic4x
 	;;
+  tic6x)
+	machine_dir=tic6x
+	;;
   tic80*)
 	machine_dir=tic80
 	;;
@@ -255,11 +262,7 @@ case "${host_cpu}" in
 	;;
   v810)
 	;;
-  v850)
-	machine_dir=v850
-	newlib_cflags="${newlib_cflags} -DPREFER_SIZE_OVER_SPEED -mv850 "
-	;;
-  v850e)
+  v850*)
 	machine_dir=v850
 	newlib_cflags="${newlib_cflags} -DPREFER_SIZE_OVER_SPEED "
 	;;
@@ -349,6 +352,7 @@ case "${host}" in
   *-*-cygwin*)
 	posix_dir=posix
 	stdio64_dir=stdio64
+	xdr_dir=xdr
 	;;
   *-*-netware*)
 	signal_dir=
@@ -373,6 +377,9 @@ case "${host}" in
 	fi
 	;;
   bfin-*-*)
+	sys_dir=
+	;;
+  cr16-*-*)
 	sys_dir=
 	;;
   crx*)
@@ -501,6 +508,10 @@ case "${host}" in
 	  have_crt0="no"
 	fi
 	;;
+  tic6x*)
+	newlib_cflags="${newlib_cflags} -DMISSING_SYSCALL_NAMES"
+	have_crt0="no"
+	;;
   tic80*)
 	sys_dir=tic80
 	;;
@@ -510,14 +521,11 @@ case "${host}" in
   v810-*-*)
 	sys_dir=sysnec810
 	;;
-  v850-*-*)
+  v850*-*-*)
 	sys_dir=sysnecv850
-	;;
-  v850e-*-*)
-	sys_dir=sysnecv850
-	;;
-  v850ea-*-*)
-	sys_dir=sysnecv850
+        if [ "x${newlib_may_supply_syscalls}" = "xno" ] ; then
+          have_crt0="no"
+        fi
 	;;
   w65-*-*)
 	sys_dir=w65
@@ -559,6 +567,7 @@ case "${host}" in
   *-*-rtems*)
 	default_newlib_io_long_long="yes"
 	default_newlib_io_c99_formats="yes"
+	newlib_cflags="${newlib_cflags} -D_COMPILING_NEWLIB"
 	newlib_cflags="${newlib_cflags} -DMALLOC_PROVIDED -DEXIT_PROVIDED -DSIGNAL_PROVIDED -DREENTRANT_SYSCALLS_PROVIDED -DHAVE_NANOSLEEP -DHAVE_BLKSIZE -DHAVE_FCNTL -DHAVE_ASSERT_FUNC"
         # turn off unsupported items in posix directory
 	newlib_cflags="${newlib_cflags} -D_NO_GETLOGIN -D_NO_GETPWENT -D_NO_GETUT -D_NO_GETPASS -D_NO_SIGSET -D_NO_WORDEXP -D_NO_POPEN"
@@ -606,6 +615,9 @@ case "${host}" in
   cris-*-* | crisv32-*-*)
 	default_newlib_io_long_long="yes"
 	newlib_cflags="${newlib_cflags} -DHAVE_RENAME -D_USE_WRITE -DCOMPACT_CTYPE"
+	syscall_dir=syscalls
+	;;
+  cr16-*-*)
 	syscall_dir=syscalls
 	;;
   crx-*-*)
@@ -776,16 +788,14 @@ case "${host}" in
 	  newlib_cflags="${newlib_cflags} -DARM_RDI_MONITOR"
 	fi
 	;;
+  tic6x*)
+	syscall_dir=
+	newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED"
+	;;
   tic80*)
 	syscall_dir=syscalls
 	;;
-  v850-*-*)
-	syscall_dir=syscalls
-	;;
-  v850e-*-*)
-	syscall_dir=syscalls
-	;;
-  v850ea-*-*)
+  v850*-*-*)
 	syscall_dir=syscalls
 	;;
   w65-*-*)

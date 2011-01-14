@@ -714,6 +714,7 @@ rs6000
 mn10200
 mn10300
 bfin
+cr16
 cris
 crx
 d30v
@@ -725,12 +726,14 @@ mep
 moxie
 microblaze
 mt
+v850
 xc16x
 xstormy16
 m32c
 rx
 arm
 spu
+tic6x
 iq2000
 libnosys'
 
@@ -2488,6 +2491,10 @@ case "${target}" in
 	subdirs="$subdirs bfin"
 
 	;;
+  cr16-*-*)
+        subdirs="$subdirs cr16"
+
+        ;;
   cris-*-* | crisv32-*-*)
 	subdirs="$subdirs cris"
 
@@ -2532,6 +2539,10 @@ case "${target}" in
         subdirs="$subdirs mt"
 
 	;;
+  v850*-*-*)
+        subdirs="$subdirs v850"
+
+        ;;
   xc16x-*-*)
 	subdirs="$subdirs xc16x"
 
@@ -2558,6 +2569,11 @@ case "${target}" in
 	config_testsuite=false
 	config_libnosys=false
 	config_libsysbase=false
+	;;
+  tic6x-*-*)
+	subdirs="$subdirs tic6x"
+
+	config_testsuite=false
 	;;
   iq2000-*-*)
 	subdirs="$subdirs iq2000"
