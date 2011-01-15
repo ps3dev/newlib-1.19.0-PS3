@@ -151,7 +151,7 @@ distclean maintainer-clean realclean: clean
 .PHONY: install info install-info clean-info
 install:
 	for outputs in ${OUTPUTS}; do\
-	 ${INSTALL_DATA} $${outputs} $(DESTDIR)/${tooldir}/lib${MULTISUBDIR}/$${outputs}; \
+	 ${INSTALL_DATA} $${outputs} $(DESTDIR)${tooldir}/lib${MULTISUBDIR}/$${outputs}; \
 	done
 
 info:

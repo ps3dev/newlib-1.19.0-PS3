@@ -15,6 +15,7 @@ dnl references to libtool libraries from aclocal and tries to verify that
 dnl AM_PROG_LIBTOOL is being used.  This must be added after
 dnl the call to NEWLIB_CONFIGURE.
 _LT_DECL_SED
+_LT_PROG_ECHO_BACKSLASH
 if test "${use_libtool}" = "yes"; then
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
@@ -25,6 +26,7 @@ if test -n "${machine_dir}"; then
 	a29k) AC_CONFIG_SUBDIRS(a29k) ;;
 	arm) AC_CONFIG_SUBDIRS(arm) ;;
 	bfin) AC_CONFIG_SUBDIRS(bfin) ;;
+	cr16) AC_CONFIG_SUBDIRS(cr16) ;;
 	cris) AC_CONFIG_SUBDIRS(cris) ;;
 	crx) AC_CONFIG_SUBDIRS(crx) ;;
 	d10v) AC_CONFIG_SUBDIRS(d10v) ;;
@@ -57,6 +59,7 @@ if test -n "${machine_dir}"; then
 	sparc) AC_CONFIG_SUBDIRS(sparc) ;;
 	spu) AC_CONFIG_SUBDIRS(spu) ;;
 	tic4x) AC_CONFIG_SUBDIRS(tic4x) ;;
+	tic6x) AC_CONFIG_SUBDIRS(tic6x) ;;
 	tic80) AC_CONFIG_SUBDIRS(tic80) ;;
 	v850) AC_CONFIG_SUBDIRS(v850) ;;
 	w65) AC_CONFIG_SUBDIRS(w65) ;;

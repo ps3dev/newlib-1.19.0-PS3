@@ -2,6 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 AC_INIT([libgloss],[LIBGLOSS_VERSION])
 AC_CONFIG_SRCDIR([libnosys])
+AC_CONFIG_SRCDIR([libsysbase])
 
 if test "${enable_shared}" = "yes" ; then
     echo "Shared libraries not supported for cross compiling, ignored"
@@ -32,6 +33,9 @@ config_testsuite=true
 
 dnl indicates whether to run configure within the libnosys subdirectory
 config_libnosys=true
+
+dnl indicates whether to run configure within the libsysbase subdirectory
+config_libsysbase=true
 
 case "${target}" in
   i[[3456]]86-*-elf* | i[[3456]]86-*-coff*)
@@ -73,6 +77,9 @@ case "${target}" in
   bfin-*-*)
 	AC_CONFIG_SUBDIRS([bfin])
 	;;
+  cr16-*-*)
+        AC_CONFIG_SUBDIRS([cr16])
+        ;;
   cris-*-* | crisv32-*-*)
 	AC_CONFIG_SUBDIRS([cris])
 	;;
@@ -106,6 +113,9 @@ case "${target}" in
   mt-*-*)
         AC_CONFIG_SUBDIRS([mt])
 	;;
+  v850*-*-*)
+        AC_CONFIG_SUBDIRS([v850])
+        ;;
   xc16x-*-*)
 	AC_CONFIG_SUBDIRS([xc16x])
 	;;
@@ -125,6 +135,11 @@ case "${target}" in
 	AC_CONFIG_SUBDIRS([spu])
 	config_testsuite=false
 	config_libnosys=false
+	config_libsysbase=false
+	;;
+  tic6x-*-*)
+	AC_CONFIG_SUBDIRS(tic6x)
+	config_testsuite=false
 	;;
   iq2000-*-*)
 	AC_CONFIG_SUBDIRS([iq2000])
@@ -139,6 +154,10 @@ dnl fi
 
 if test "${config_libnosys}" = "true"; then
   AC_CONFIG_SUBDIRS([libnosys])
+fi
+
+if test "${config_libsysbase}" = "true"; then
+  AC_CONFIG_SUBDIRS([libsysbase])
 fi
 
 LIB_AC_PROG_CC
