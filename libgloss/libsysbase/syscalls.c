@@ -20,14 +20,11 @@ struct __syscalls_t __syscalls = {
 	NULL,			//	chmod_r
 	NULL,			//	rename_r
 	NULL,			//	utime_r
-
 	NULL,			//	umask_r
-
 	NULL,			//	mkdir_r
 	NULL,			//	rmdir_r
 	NULL,			//	chdir_r
 	NULL,			//	getcwd_r
-
 	NULL,			//	closedir_r
 	NULL,			//	opendir_r
 	NULL,			//	readdir_r
@@ -35,18 +32,19 @@ struct __syscalls_t __syscalls = {
 	NULL,			//	rewinddir_r
 	NULL,			//	seekdir_r
 	NULL,			//	telldir_r
-
+	NULL,			//	getpid_r
 	NULL,			//	isatty_r
 	NULL,			//	execve_r
 	NULL,			//	gettod_r
 	NULL,			//	settod_r
+	NULL,			//	usleep_r
 	NULL,			//	getrusage_r
-
+	NULL,			//	sleep_r
+	NULL,			//	times_r
 	NULL,			//  sys_lwmutex_create_r
 	NULL,			//	sys_lwmutex_destroy_r
 	NULL,			//	sys_lwmutex_lock_r
 	NULL,			//	sys_lwmutex_trylock_r
 	NULL,			//	sys_lwmutex_unlock_r
-
-	NULL,			//	exit
+	NULL			//	exit
 };

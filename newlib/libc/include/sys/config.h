@@ -215,12 +215,7 @@
 #define _READ_WRITE_RETURN_TYPE _ssize_t
 #endif
 
-#if defined(__PPU__)
-/* we want the reentrancy structure to be returned by a function */
-#define __DYNAMIC_REENT__
-#endif
-
-#if defined(__lv2ppu__)
+#if defined(__PPU__) || defined(__lv2ppu__)
 /* we want the reentrancy structure to be returned by a function */
 #define __DYNAMIC_REENT__
 #endif

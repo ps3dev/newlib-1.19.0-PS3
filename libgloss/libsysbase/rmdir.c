@@ -1,12 +1,14 @@
 #include "config.h"
 #include <_ansi.h>
 #include <_syslist.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/syscalls.h>
+#include <stdio.h>
+#include <reent.h>
 #include <errno.h>
+#include <sys/syscalls.h>
 
-int rmdir(const char *dirname)
+int
+_DEFUN(rmdir,(dirname),
+	   const char *dirname)
 {
   struct _reent *r = _REENT;
 

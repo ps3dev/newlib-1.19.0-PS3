@@ -4,6 +4,7 @@
 #include <sys/reent.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include <sys/times.h>
 #include <sys/stat.h>
 #include <sys/dirent.h>
 #include <sys/resource.h>
@@ -19,40 +20,44 @@ struct __syscalls_t {
 	_ssize_t (*read_r)(struct _reent *r,int fd,void *ptr,size_t len);
 	_ssize_t (*write_r)(struct _reent *r,int fd,const void *ptr,size_t len);
 	_off_t (*lseek_r)(struct _reent *r,int fd,_off_t pos,int dir);
-	_off_t (*lseek64_r)(struct _reent *r,int fd,_off_t pos,int dir);
+	_off64_t (*lseek64_r)(struct _reent *r,int fd,_off64_t pos,int dir);
 	int (*fstat_r)(struct _reent *r,int fd,struct stat *st);
 	int (*fstat64_r)(struct _reent *r,int fd,struct stat *st);
-	int (*stat_r)(struct _reent *r, const char *path, struct stat *st);
-	int (*stat64_r)(struct _reent *r, const char *path, struct stat *st);
+	int (*stat_r)(struct _reent *r,const char *path,struct stat *st);
+	int (*stat64_r)(struct _reent *r,const char *path,struct stat *st);
 	int (*ftruncate_r)(struct _reent *r,int fd,off_t len);
-	int (*truncate_r)(struct _reent *r, const char *path, off_t length);
+	int (*truncate_r)(struct _reent *r,const char *path,off_t len);
 	int (*fsync_r)(struct _reent *r,int fd);
-	int (*link_r)(struct _reent *r,const char *old, const char *new);
+	int (*link_r)(struct _reent *r,const char *old,const char *new);
 	int (*unlink_r)(struct _reent *r,const char *name);
 	int (*chmod_r)(struct _reent *r,const char *path,mode_t mode);
-	int (*rename_r)(struct _reent *r, const char *old, const char *new);
-	int (*utime_r)(struct _reent *r, const char *path, const struct utimbuf *times);
+	int (*rename_r)(struct _reent *r,const char *old,const char *new);
+	int (*utime_r)(struct _reent *r,const char *path,const struct utimbuf *times);
 
 	mode_t (*umask_r)(struct _reent *r,mode_t cmask);
 
 	int (*mkdir_r)(struct _reent *r,const char *path,mode_t mode);
 	int (*rmdir_r)(struct _reent *r,const char *dirname);
 	int (*chdir_r)(struct _reent *r,const char *dirname);
-	char* (*getcwd_r)(struct _reent *r,char *buf, size_t size);
+	char* (*getcwd_r)(struct _reent *r,char *buf,size_t size);
 
-	int (*closedir_r)(struct _reent *r,DIR*);
-	DIR* (*opendir_r)(struct _reent *r,const char*);
-	struct dirent* (*readdir_r)(struct _reent *r,DIR*);
-	int (*readdir_r_r)(struct _reent *r,DIR*, struct dirent*, struct dirent**);
-	void (*rewinddir_r)(struct _reent *r,DIR*);
-	void (*seekdir_r)(struct _reent *r,DIR*, long int);
-	long int (*telldir_r)(struct _reent *r,DIR*);
+	int (*closedir_r)(struct _reent *r,DIR *dirp);
+	DIR* (*opendir_r)(struct _reent *r,const char *dirname);
+	struct dirent* (*readdir_r)(struct _reent *r,DIR *dirp);
+	int (*readdir_r_r)(struct _reent *r,DIR *dirp,struct dirent *entry,struct dirent **result);
+	void (*rewinddir_r)(struct _reent *r,DIR *dirp);
+	void (*seekdir_r)(struct _reent *r,DIR *dirp,long int loc);
+	long int (*telldir_r)(struct _reent *r,DIR *dirp);
 
+	int (*getpid_r)(struct _reent *r);
 	int (*isatty_r)(struct _reent *r,int fd);
 	int (*execve_r)(struct _reent *r,char *name,char **argv,char **env);
 	int (*gettod_r)(struct _reent *r,struct timeval *ptimeval,void *ptimezone);
 	int (*settod_r)(struct _reent *r,const struct timeval *ptimeval,const struct timezone *ptimezone);
-	int (*getrusage_r)(struct _reent *r,int who, struct rusage *r_usage);
+	int (*usleep_r)(struct _reent *r,useconds_t usec);
+	int (*getrusage_r)(struct _reent *r,int who,struct rusage *r_usage);
+	unsigned int (*sleep_r)(struct _reent *r,unsigned int sec);
+	clock_t (*times_r)(struct _reent *r,struct tms *buf);
 
 	int (*sys_lwmutex_create_r)(struct _reent *r,sys_lwmutex_t *lwmutex,const sys_lwmutex_attr_t *attr);
 	int (*sys_lwmutex_destroy_r)(struct _reent *r,sys_lwmutex_t *lwmutex);

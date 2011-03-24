@@ -8,11 +8,11 @@ AM_CCASFLAGS = $(INCLUDES)
 
 noinst_LIBRARIES = lib.a
 
-lib_a_SOURCES = dup.c getcwd.c getrusage.c glob.c globfree.c lock.c lock_recursive.c autolock.c getreent.c lv2errno.c opendir.c closedir.c readdir.c
+lib_a_SOURCES = getreent.c lock.c lock_recursive.c lock_internal.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 
-all: crt0.o
+all-local: crt0.o
 
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
 CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host

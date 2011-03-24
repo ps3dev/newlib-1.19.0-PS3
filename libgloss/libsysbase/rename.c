@@ -16,7 +16,7 @@ int
 _DEFUN(_rename,(old,new),
 	   const char *old _AND
 	   const char *new) {
-	struct _reent *r = REENT;
+	struct _reent *r = _REENT;
 #endif
 	if(__syscalls.rename_r)
 		return __syscalls.rename_r(r,old,new);

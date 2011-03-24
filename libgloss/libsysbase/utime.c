@@ -2,12 +2,12 @@
 #include <_ansi.h>
 #include <_syslist.h>
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/syscalls.h>
+#include <reent.h>
 #include <errno.h>
 #include <utime.h>
+#include <sys/syscalls.h>
 
-int utime(const char* path, const struct utimbuf* times)
+int utime(const char *path,const struct utimbuf *times)
 {
   struct _reent *r = _REENT;
 

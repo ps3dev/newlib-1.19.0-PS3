@@ -52,9 +52,8 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-lock.$(OBJEXT) \
-	lib_a-lock_recursive.$(OBJEXT) lib_a-autolock.$(OBJEXT) \
-	lib_a-getreent.$(OBJEXT)
+am_lib_a_OBJECTS = lib_a-getreent.$(OBJEXT) lib_a-lock.$(OBJEXT) \
+				   lib_a-lock_recursive.$(OBJEXT) lib_a-lock_internal.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -103,7 +102,6 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
-PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 RANLIB = @RANLIB@
@@ -172,7 +170,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = lock.c lock_recursive.c autolock.c getreent.c
+lib_a_SOURCES = getreent.c lock.c lock_recursive.c lock_internal.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -235,6 +233,12 @@ distclean-compile:
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
+lib_a-getreent.o: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.o `test -f 'getreent.c' || echo '$(srcdir)/'`getreent.c
+
+lib_a-getreent.obj: getreent.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
+
 lib_a-lock.o: lock.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock.o `test -f 'lock.c' || echo '$(srcdir)/'`lock.c
 
@@ -247,17 +251,11 @@ lib_a-lock_recursive.o: lock_recursive.c
 lib_a-lock_recursive.obj: lock_recursive.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock_recursive.obj `if test -f 'lock_recursive.c'; then $(CYGPATH_W) 'lock_recursive.c'; else $(CYGPATH_W) '$(srcdir)/lock_recursive.c'; fi`
 
-lib_a-autolock.o: autolock.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-autolock.o `test -f 'autolock.c' || echo '$(srcdir)/'`autolock.c
+lib_a-lock_internal.o: lock_internal.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock_internal.o `test -f 'lock_internal.c' || echo '$(srcdir)/'`lock_internal.c
 
-lib_a-autolock.obj: autolock.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-autolock.obj `if test -f 'autolock.c'; then $(CYGPATH_W) 'autolock.c'; else $(CYGPATH_W) '$(srcdir)/autolock.c'; fi`
-
-lib_a-getreent.o: getreent.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.o `test -f 'getreent.c' || echo '$(srcdir)/'`getreent.c
-
-lib_a-getreent.obj: getreent.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getreent.obj `if test -f 'getreent.c'; then $(CYGPATH_W) 'getreent.c'; else $(CYGPATH_W) '$(srcdir)/getreent.c'; fi`
+lib_a-lock_internal.obj: lock_internal.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-lock_internal.obj `if test -f 'lock_internal.c'; then $(CYGPATH_W) 'lock_internal.c'; else $(CYGPATH_W) '$(srcdir)/lock_internal.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -411,8 +409,8 @@ uninstall-am:
 
 .MAKE: install-am install-strip
 
-.PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
-	clean-generic clean-noinstLIBRARIES ctags distclean \
+.PHONY: CTAGS GTAGS all all-am all-local am--refresh check check-am \
+	clean clean-generic clean-noinstLIBRARIES ctags distclean \
 	distclean-compile distclean-generic distclean-tags dvi dvi-am \
 	html html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
@@ -425,7 +423,7 @@ uninstall-am:
 	uninstall-am
 
 
-all:
+all-local: crt0.o
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

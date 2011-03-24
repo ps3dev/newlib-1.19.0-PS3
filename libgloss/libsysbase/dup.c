@@ -1,12 +1,11 @@
-//
-// dup.c
-// by Dan Peori (dan.peori@oopo.net)
-//
-
 #include <errno.h>
+#include <fcntl.h>
+#include <reent.h>
 
-int dup ( int old_handle )
+int dup(int filedes)
 {
-  errno = ENOSYS;
+	struct _reent *r = _REENT;
+	r->_errno = ENOSYS;
+	//return fcntl(filedes,F_DUPFD,0);
   return -1;
 }

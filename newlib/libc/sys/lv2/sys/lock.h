@@ -3,18 +3,19 @@
 
 #include <stdint.h>
 
-struct sys_lwmutex {
+struct _sys_lwmutex
+{
   uint64_t lock_var;
   uint32_t attribute;
   uint32_t recursive_count;
   uint32_t sleep_queue;
-  uint32_t pad;
+	uint32_t _pad;
 };
 
-typedef struct sys_lwmutex __libc_lock_t, __libc_lock_recursive_t;
+typedef struct _sys_lwmutex __libc_lock_t, __libc_lock_recursive_t;
 
-#define __libc_lock_define_initialized(CLASS, NAME) CLASS __libc_lock_t NAME = {0,};
-#define __libc_lock_define_initialized_recursive(CLASS, NAME) CLASS __libc_lock_recursive_t NAME = {0,};
+#define __libc_lock_define_initialized(CLASS,NAME) CLASS __libc_lock_t NAME = {0,};
+#define __libc_lock_define_initialized_recursive(CLASS,NAME) CLASS __libc_lock_recursive_t NAME = {0,};
 
 int __libc_lock_init(__libc_lock_t *lock);
 int __libc_lock_init_recursive(__libc_lock_recursive_t *lock);

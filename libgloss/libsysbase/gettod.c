@@ -25,3 +25,6 @@ _DEFUN(_gettimeofday,(ptimeval,ptimezone),
 	r->_errno = ENOSYS;
 	return -1;
 }
+
+
+		
