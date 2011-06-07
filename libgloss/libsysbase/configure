@@ -1501,7 +1501,7 @@ case "${target}" in
 _ACEOF
 
    ;;
-  powerpc64-*-lv2*)
+  powerpc64-ps3-elf)
    cat >>confdefs.h <<\_ACEOF
 #define REENTRANT_SYSCALLS_PROVIDED 1
 _ACEOF
