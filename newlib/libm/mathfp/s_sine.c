@@ -74,6 +74,7 @@ QUICKREF
 
 static const double HALF_PI = 1.57079632679489661923;
 static const double ONE_OVER_PI = 0.31830988618379067154;
+static const double ONE_OVER_2PI = 0.15915494309189533577;
 static const double r[] = { -0.16666666666666665052,
                              0.83333333333331650314e-02,
                             -0.19841269841201840457e-03,
@@ -102,6 +103,14 @@ _DEFUN (sine, (double, int),
         return (z_notanum.d); 
     }
 
+
+  /* Check for values of x that will overflow here. */
+  if (fabs (x) > YMAX)
+    {
+      double m = floor(x * ONE_OVER_2PI);
+      x -= (m * 2 * M_PI);
+    }
+
   /* Use sin and cos properties to ease computations. */
   if (cosine)
     {
@@ -120,13 +129,6 @@ _DEFUN (sine, (double, int),
           sgn = 1;
           y = x;
         }
-    }
-
-  /* Check for values of y that will overflow here. */
-  if (y > YMAX)
-    {
-      errno = ERANGE;
-      return (x);
     }
 
   /* Calculate the exponent. */
