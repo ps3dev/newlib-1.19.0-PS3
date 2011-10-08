@@ -54,7 +54,7 @@ _DEFUN (sinef, (float, int),
   /* Check for values of x that will overflow here. */
   if (fabsf (x) > YMAX)
     {
-      double m = floorf(x * ONE_OVER_2PI);
+      float m = floorf(x * ONE_OVER_2PI);
       x -= (m * 2 * M_PI);
     }
 
